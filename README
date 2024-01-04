@@ -1,0 +1,9 @@
+# setup
+git clone https://github.com/sogaiu/spork-http-sample
+cd spork-http-sample
+jpm -l deps
+
+# start web server
+jpm -l janet main.janet
+
+# from browser access http://127.0.0.1:8000/?name=janet.png
