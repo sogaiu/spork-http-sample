@@ -72,11 +72,11 @@
   (def page
     ``
     <!DOCTYPE html>
-    <head>
-      <meta charset="utf-8">
-      <title>spork/http router demo</title>
-    </head>
     <html>
+      <head>
+        <meta charset="utf-8">
+        <title>spork/http router demo</title>
+      </head>
       <body>
         <ul>
           <li><a href="/images?name=janet.png">image</a>
