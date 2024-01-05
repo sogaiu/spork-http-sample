@@ -9,24 +9,30 @@
 
 ###################################################################
 
+(def tp-headers
+  {"Content-type"
+   "text/plain; charset=utf-8"})
+
+###################################################################
+
 (defn image-handler
   [request]
   (def fname (get-in request [:query "name"]))
   # query contains name?
   (when (not fname)
-    (break {:headers "Content-type: text/plain"
+    (break {:headers tp-headers
             :status 404 # XXX: likely better status code exists
             :body "No name found in query"}))
   # file exists?
   (when (not (os/stat fname))
-    (break {:headers "Content-type: text/plain"
+    (break {:headers tp-headers
             :status 404 # XXX: likely better status code exists
             :body (string/format "Did not find %s" fname)}))
   #
   (with [img-f (file/open fname :rb)]
     (def data (file/read img-f :all))
     #
-    {:headers "Content-type: image/png"
+    {:headers {"Content-type" "image/png"}
      :status 200
      :body data}))
 
@@ -44,9 +50,9 @@
    #
    "seneca"
    "If one knows not to which port one sails, no wind is favorable."
-   # XXX: gets garbled
-   #"老子"
-   #"道可道，非常道。名可名，非常名。"
+   #
+   "老子"
+   "道可道，非常道。名可名，非常名。"
    })
 
 (defn quote-handler
@@ -61,7 +67,7 @@
       #
       (choose (keys quotes) (hash request))))
   #
-  {:headers "Content-type: text/plain"
+  {:headers tp-headers
    :status 200
    :body (get quotes who "You must have goofed up somewhere...")})
 
@@ -86,7 +92,8 @@
     </html>
     ``)
   #
-  {:headers "Content-type: text/html"
+  {:headers {"Content-type"
+             "text/html; charset=utf-8"}
    :status 200
    :body page})
 
