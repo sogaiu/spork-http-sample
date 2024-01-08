@@ -89,7 +89,7 @@
       </head>
       <body>
         <ul>
-          <li><a href="/images?name=janet.png">image</a>
+          <li><a href="/images?name=janet.png">image via query</a>
           <li><a href="/quotes?random">some quote</a>
         </ul>
       </body>
