@@ -46,14 +46,17 @@
   {"berra"
    "You can observe a lot by watching."
    #
+   "disraeli"
+   "The wise make proverbs, and fools repeat them."
+   #
    "franklin"
    "A place for everything, everything in its place."
    #
-   "socrates"
-   "I drank what?"
-   #
    "seneca"
    "If one knows not to which port one sails, no wind is favorable."
+   #
+   "socrates"
+   "I drank what?"
    #
    "老子"
    "道可道，非常道。名可名，非常名。"
