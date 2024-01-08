@@ -61,9 +61,17 @@
 
 (defn quote-handler
   [request]
+  (when (get-in request [:query "redirect"])
+    (def who (choose (keys quotes) (hash request)))
+    (break {:headers
+            (merge tp-headers
+                   {"Location"
+                    (string/format "/quotes?who=%s" who)})
+            :status 302}))
+  #
   (def who
     (cond
-      (get-in request [:query "random"])
+      (get-in request [:query "some"])
       (choose (keys quotes) (hash request))
       #
       (def found (get-in request [:query "who"]))
@@ -90,7 +98,8 @@
       <body>
         <ul>
           <li><a href="/images?name=janet.png">image via query</a>
-          <li><a href="/quotes?random">some quote</a>
+          <li><a href="/quotes?some">some quote</a>
+          <li><a href="/quotes?redirect">some quote via redirect</a>
         </ul>
       </body>
     </html>
