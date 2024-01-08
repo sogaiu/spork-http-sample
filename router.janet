@@ -32,7 +32,7 @@
   (def [status result] (protect (slurp fname)))
   #
   (when (not status)
-    (break {:headers {"Content-type" "text/plain"}
+    (break {:headers tp-headers
             :status 500
             :body (string/format "Failed to load %s" fname)}))
   #
