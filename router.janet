@@ -21,20 +21,24 @@
   # query contains name?
   (when (not fname)
     (break {:headers tp-headers
-            :status 404 # XXX: likely better status code exists
+            :status 400
             :body "No name found in query"}))
   # file exists?
   (when (not (os/stat fname))
     (break {:headers tp-headers
-            :status 404 # XXX: likely better status code exists
+            :status 404
             :body (string/format "Did not find %s" fname)}))
+  # try to read image file
+  (def [status result] (protect (slurp fname)))
   #
-  (with [img-f (file/open fname :rb)]
-    (def data (file/read img-f :all))
-    #
-    {:headers {"Content-type" "image/png"}
-     :status 200
-     :body data}))
+  (when (not status)
+    (break {:headers {"Content-type" "text/plain"}
+            :status 500
+            :body (string/format "Failed to load %s" fname)}))
+  #
+  {:headers {"Content-type" "image/png"}
+   :status 200
+   :body result})
 
 ###################################################################
 
