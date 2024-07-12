@@ -28,6 +28,20 @@ jpm -l janet image-via-query.janet
 
 #############################################################
 
+# form sample
+
+# setup
+git clone https://github.com/sogaiu/spork-http-sample
+cd spork-http-sample
+jpm -l deps
+
+# start web server
+jpm -l janet form.janet
+
+# from browser access http://127.0.0.1:8000/
+
+#############################################################
+
 # router sample
 
 # setup
